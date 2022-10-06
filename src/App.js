@@ -1,23 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import "./App.css";
+import BudgetEntry from "./budget-entry/BudgetEntry";
+import Dashboard from "./dashboard/Dashboard";
+import ExpenseDetails from "./expense-details/ExpenseDetails";
+import ExpenseEntry from "./expense-entry/ExpenseEntry";
+import { useState } from "react";
 
 function App() {
+  const [dashboardValues, setDashboardValues] = useState({
+    budgetValue: 0,
+    totalExpense: 0,
+  });
+  const [expenseDetailsList, setExpenseDetailsList] = useState([]);
+
+  const getBudgetValue = (budgetValue) => {
+    setDashboardValues({
+      ...dashboardValues,
+      budgetValue: (dashboardValues.budgetValue = budgetValue),
+    });
+  };
+
+  const expenseTotal = expenseDetailsList.reduce((total, expense) => {
+    total = total + +expense.expenseValue;
+    return total;
+  }, 0);
+
+  const getExpenseList = (expenses, newExpense) => {
+    setExpenseDetailsList([...expenses, newExpense]);
+  };
+
+  const deleteExpenseItem = (position) => {
+    expenseDetailsList.map((expense, index) => {
+      const { id } = expense;
+      if (id === position) {
+        const expensesCopy = expenseDetailsList;
+
+        expensesCopy.splice(index, 1);
+        
+        return setExpenseDetailsList(expensesCopy);
+      }
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <h3>BUDGET APP</h3>
+      <BudgetEntry sendBudgetValue={getBudgetValue} />
+      <ExpenseEntry sendExpenseList={getExpenseList} />
+      <Dashboard
+        dashboardValues={dashboardValues}
+        expenseTotal={expenseTotal}
+      />
+      <ExpenseDetails
+        expenses={expenseDetailsList}
+        deleteExpenseItem={deleteExpenseItem}
+      />
     </div>
   );
 }

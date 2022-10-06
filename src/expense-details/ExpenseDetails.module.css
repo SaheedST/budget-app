@@ -1,0 +1,39 @@
+.expense-details-container {
+  height: 11.5rem;
+  width: 30rem;
+  position: absolute;
+  right: 2rem;
+  bottom: 1.5rem;
+}
+.expense_heading {
+  display: flex;
+  justify-content: space-around;
+  width: 20rem;
+  margin-bottom: 1.5rem;
+}
+
+.expense-items-container {
+    width: 30rem;
+  display: grid;
+  grid-template-columns:2fr 3fr 1.5fr;
+}
+
+.expense-item {
+  text-align: center;
+}
+
+.expenses {
+  color: #9c1813;
+  text-align: center;
+}
+
+.edit_icon {
+  color: #056590;
+  cursor: pointer;
+  margin-right: 0.25rem;
+}
+
+.edit_trash {
+  color: #9c1813;
+  cursor: pointer;
+}

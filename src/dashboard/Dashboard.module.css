@@ -1,0 +1,42 @@
+.dashboard-container {
+  display: flex;
+  justify-content: space-around;
+  height: 9rem;
+  width: 30rem;
+  position: absolute;
+  right: 2rem;
+  top: 3.5rem;
+}
+
+.dashboard-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.icons {
+  align-self: center;
+  color: #056590;
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.total_amount {
+  align-self: center;
+  font-size: 2rem;
+}
+
+.budget {
+  color: #408a37;
+}
+
+.expenses {
+  color: #9c1813;
+}
+
+
