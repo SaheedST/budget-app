@@ -1,15 +1,11 @@
 import classes from "./ExpenseEntry.module.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { BudgetContext } from "../../contexts/AppContext";
 
-const EXPENSE_VALUES = [
-  { id: 1, expenseTitle: "Lunch", expenseValue: 20 },
-  { id: 2, expenseTitle: "Groceries", expenseValue: 169 },
-];
-
-const ExpenseEntry = ({ sendExpenseList }) => {
-  const [expenses, setExpenses] = useState(EXPENSE_VALUES);
+const ExpenseEntry = () => {
+  const {expenses, setExpenses} = useContext(BudgetContext);
   const [newExpense, setNewExpense] = useState({
-    id: Math.random(),
+    id: '',
     expenseTitle: "",
     expenseValue: "",
   });
@@ -25,11 +21,10 @@ const ExpenseEntry = ({ sendExpenseList }) => {
   const expenseSubmitHandler = (e) => {
     e.preventDefault();
     setExpenses([...expenses, newExpense]);
-    sendExpenseList(expenses, newExpense);
+    
 
     setNewExpense({ id: Math.random(), expenseTitle: "", expenseValue: "" });
   };
-
 
   return (
     <form

@@ -1,23 +1,22 @@
 import classes from "./BudgetEntry.module.css";
-import { useState } from "react";
+import { useContext } from "react";
+import { BudgetContext } from "../../contexts/AppContext";
 
 // const BUDGET = 2550;
 
-const BudgetEntry = ({sendBudgetValue}) => {
-  const [budgetValue, setBudgetValue] = useState('');
+const BudgetEntry = () => {
+  const { budgetAmt, setBudgetAmt, updatedBudgetAmt, setUpdatedBudgetAmt } =
+    useContext(BudgetContext);
 
-  const budgetValueHandler = (e) => {
-    setBudgetValue(e.target.value);
+  const budgetAmtHandler = (e) => {
+    setBudgetAmt(e.target.value);
   };
 
   const budgetSubmitHandler = (e) => {
     e.preventDefault();
-   
-    sendBudgetValue(budgetValue)
-    setBudgetValue('');
+    setUpdatedBudgetAmt(+updatedBudgetAmt + +budgetAmt);
+    setBudgetAmt("");
   };
-
-  
 
   return (
     <form
@@ -28,9 +27,9 @@ const BudgetEntry = ({sendBudgetValue}) => {
       <input
         type={"number"}
         required
-        name="budgetValue"
-        value={budgetValue}
-        onChange={budgetValueHandler}
+        name="budgetAmt"
+        value={budgetAmt}
+        onChange={budgetAmtHandler}
         placeholder={"Numbers only"}
       />
       <button type={"submit"}>Add Budget</button>

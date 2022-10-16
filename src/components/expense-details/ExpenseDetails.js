@@ -1,7 +1,10 @@
 import classes from "./ExpenseDetails.module.css";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useContext } from "react";
+import { BudgetContext } from "../../contexts/AppContext";
 
-const ExpenseDetails = ({ expenses, deleteExpenseItem}) => {
+const ExpenseDetails = () => {
+  const { expenses, deleteExpenseItem } = useContext(BudgetContext);
   return (
     <div className={classes["expense-details-container"]}>
       <div className={classes.expense_heading}>

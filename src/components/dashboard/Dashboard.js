@@ -1,10 +1,12 @@
 import classes from "./Dashboard.module.css";
 import { FaMoneyBillAlt, FaRegCreditCard, FaDollarSign } from "react-icons/fa";
+import { useContext } from "react";
+import { BudgetContext } from "../../contexts/AppContext";
 
-const Dashboard = ({ dashboardValues, expenseTotal }) => {
-  const { budgetValue } = dashboardValues;
+const Dashboard = () => {
+  const { totalExpense, updatedBudgetAmt } = useContext(BudgetContext);
 
-  const balance = +budgetValue - +expenseTotal;
+  const balance = +updatedBudgetAmt - +totalExpense;
 
   return (
     <div className={classes["dashboard-container"]}>
@@ -14,7 +16,7 @@ const Dashboard = ({ dashboardValues, expenseTotal }) => {
           <FaMoneyBillAlt />
         </div>
         <div className={`${classes.total_amount} ${classes.budget}`}>
-          ${budgetValue}
+          ${updatedBudgetAmt}
         </div>
       </div>
       <div className={classes["dashboard-items"]}>
@@ -23,7 +25,7 @@ const Dashboard = ({ dashboardValues, expenseTotal }) => {
           <FaRegCreditCard />
         </div>
         <div className={`${classes.total_amount} ${classes.expenses}`}>
-          ${expenseTotal}
+          ${totalExpense}
         </div>
       </div>
       <div className={classes["dashboard-items"]}>
